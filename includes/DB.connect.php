@@ -2,24 +2,30 @@
 
 class Dbh {
 
+  // not secure
   private $host = 'localhost';
   private $user = 'root';
   private $pwd = '';
   private $dbName = 'sport_events';
   private $conn = null;
 
+  // ctor
   public function __construct() {
+
         $this->connect();
   }
 
+  // OOP uses new mysqli (mysqli->query())
+  // Procedural uses mysqli_connect (mysqli_query())
   public function connect() {
+
       $this->conn = new mysqli($this->host, $this->user, $this->pwd, $this->dbName);
   }
 
   public function getAllEvents() {
 
     $sql = "SELECT * FROM events";
-    $query = mysqli_query($this->conn, $sql);
+    $query = $this->conn->query($sql);
     $eventArr = $query->fetch_all(MYSQLI_ASSOC);
     return $eventArr;
   }
@@ -28,18 +34,26 @@ class Dbh {
 
     $sql = "SELECT * FROM events";
 
+    // if the filter button is pushed
     if(isset($_POST['filter'])){
       $sql = "";
+      // get the chosen value
       $search_value = $_POST['category'];
+      // get only events with chosen sport
       $sql .= "SELECT * FROM events
       WHERE events._sport_id='{$search_value}'";
     }
+    // check if the chosen category is default
     if($_POST['category'] == 'default'){
         $sql = "";
         $sql = "SELECT * FROM events";
     }
 
-    $query = mysqli_query($this->conn, $sql);
+    // perform a query on the DB
+    $query = $this->conn->query($sql);
+    // fetch all result rows as an associative array
+    // allows to create link bw keys and data
+    // assoc arrays have strings as indexes
     $eventArr = $query->fetch_all(MYSQLI_ASSOC);
     return $eventArr;
 
@@ -47,10 +61,11 @@ class Dbh {
 
   public function outputEvents($eventArr) {
 
-    print("<h2>Upcomming Events</h2>");
+    print("<h2>Upcoming Events</h2>");
 
     foreach ($eventArr as $e) {
-      echo "<tr><td>" .$e['date'].
+      echo "<tr><td>" .date('D', strtotime($e['date'])).
+        "</td><td>" .$e['date'].
         "</td><td>" .$e['time'].
         "</td><td>" .$e['team_1'].
         "</td><td>" .$e['team_2'].
@@ -74,8 +89,8 @@ class Dbh {
     $sql .= "'" . $team_1 . "',";
     $sql .= "'" . $team_2 . "')";
 
-    //print $sql;
-    if(mysqli_query($this->conn, $sql)){
+    //print $sql
+    if($query = $this->conn->query($sql)){
       print ("Stored");
     } else {
       print("Failed");
@@ -88,8 +103,8 @@ class Dbh {
 
     $sql = "DELETE FROM events WHERE id = '" . $id . "'";
 
-    //print $sql;
-    if(mysqli_query($this->conn, $sql)){
+    //print $sql
+    if($query = $this->conn->query($sql)){
       print ("Stored");
     } else {
       print("Failed");
