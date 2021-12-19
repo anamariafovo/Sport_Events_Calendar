@@ -1,11 +1,10 @@
-
 body {
   margin: 0;
-  font-family: "Source Code Pro", monospace;
+  font-family: 'Source Code Pro', monospace;
   font-size: 1.125rem;
   font-weight: 300;
   line-height: 1.6;
-  background-color:  #f6f7fc;
+  background-color: #f6f7fc;
 }
 h1,
 h2,
@@ -18,10 +17,10 @@ h1 {
   font-size: 2rem;
   margin: 0;
 }
-ul{
+ul {
   list-style: none;
 }
-a{
+a {
   text-decoration: none;
 }
 a:hover,
@@ -30,10 +29,10 @@ a:focus {
 }
 .container {
   width: 90%;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }
-.btn_submit{
+.btn_submit {
   padding: 0.75em;
   background: #191950;
   border: none;
@@ -43,10 +42,10 @@ a:focus {
   font-size: 1rem;
   cursor: pointer;
 }
-.btn_submit:hover{
+.btn_submit:hover {
   background: #333363;
 }
-.btn_delete{
+.btn_delete {
   padding: 0.5em;
   background: #191950;
   border: none;
@@ -64,7 +63,7 @@ header {
   text-align: center;
   margin-bottom: 2em;
 }
-.header_title{
+.header_title {
   /* font-weight: 700; */
   background-color: #f80103;
   color: #fff;
@@ -72,20 +71,20 @@ header {
   padding: 0 0.5em;
   border-radius: 20px;
 }
-.header_section{
+.header_section {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.redirects{
+.redirects {
   display: flex;
   justify-content: space-between;
 }
-nav li{
+nav li {
   margin-left: 2.5em;
   font-size: 1.2rem;
 }
-nav a{
+nav a {
   cursor: pointer;
   color: #cfd9fe;
 }
@@ -94,7 +93,7 @@ nav a{
 .filter_section {
   margin: 2em 0;
 }
-.events_info{
+.events_info {
   font-weight: 700;
 }
 select {
@@ -104,17 +103,17 @@ select {
   background: #191950;
   color: #fff;
   font-size: 1rem;
+  margin-bottom: 1em;
 }
 
-
 /* ======================= EVENTS ======================= */
-.events_section{
+.events_section {
   margin: 2em 0;
 }
 
 /* ======================= ADD ======================= */
-.insert_section{
-  width: 50%;
+.insert_section {
+  width: 60%;
   display: flex;
   flex-direction: column;
   margin-bottom: 2em;
