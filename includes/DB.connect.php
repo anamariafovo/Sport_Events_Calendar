@@ -20,6 +20,11 @@ class Dbh {
   public function connect() {
 
       $this->conn = new mysqli($this->host, $this->user, $this->pwd, $this->dbName);
+      //handle connection error
+      if($this->conn->connect_errno) {
+        echo "Failed to connect to MySQL: " . $this->conn->connect_errno;
+        exit();
+      }
   }
 
   public function getAllEvents() {
