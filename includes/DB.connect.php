@@ -25,8 +25,11 @@ class Dbh {
   public function getAllEvents() {
 
     $sql = "SELECT * FROM events";
-    $query = $this->conn->query($sql);
-    $eventArr = $query->fetch_all(MYSQLI_ASSOC);
+    // here perform a single SQL query
+    $query = $this->conn->real_query($sql);
+    // use store_results() instead of fetch_all(MYSQLI_ASSOC)
+    $eventArr = $this->conn->store_result();
+    $this->conn->close();
     return $eventArr;
   }
 
@@ -50,11 +53,10 @@ class Dbh {
     }
 
     // perform a query on the DB
-    $query = $this->conn->query($sql);
+    $query = $this->conn->real_query($sql);    
     // fetch all result rows as an associative array
-    // allows to create link bw keys and data
-    // assoc arrays have strings as indexes
-    $eventArr = $query->fetch_all(MYSQLI_ASSOC);
+    $eventArr = $this->conn->store_result();
+    $this->conn->close();
     return $eventArr;
 
   }
@@ -90,7 +92,7 @@ class Dbh {
     $sql .= "'" . $team_2 . "')";
 
     //print $sql
-    if($query = $this->conn->query($sql)){
+    if($query = $this->conn->real_query($sql)){
       print ("Stored");
     } else {
       print("Failed");
@@ -104,7 +106,7 @@ class Dbh {
     $sql = "DELETE FROM events WHERE id = '" . $id . "'";
 
     //print $sql
-    if($query = $this->conn->query($sql)){
+    if($query = $this->conn->real_query($sql)){
       print ("Stored");
     } else {
       print("Failed");
