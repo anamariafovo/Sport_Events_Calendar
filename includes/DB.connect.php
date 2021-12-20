@@ -47,19 +47,19 @@ class Dbh {
       $sql = "";
       // get the chosen value
       $search_value = $_POST['category'];
+      // check if the chosen category is default
+      if($search_value == 'default'){
+          $sql = "";
+          $sql = "SELECT * FROM events";
+      }
       // get only events with chosen sport
-      $sql .= "SELECT * FROM events
-      WHERE events._sport_id='{$search_value}'";
-    }
-    // check if the chosen category is default
-    if($_POST['category'] == 'default'){
-        $sql = "";
-        $sql = "SELECT * FROM events";
+      else{
+        $sql .= "SELECT * FROM events
+        WHERE events._sport_id='{$search_value}'";
+      }
     }
 
-    // perform a query on the DB
     $query = $this->conn->real_query($sql);    
-    // fetch all result rows as an associative array
     $eventArr = $this->conn->store_result();
     $this->conn->close();
     return $eventArr;
@@ -96,7 +96,7 @@ class Dbh {
     $sql .= "'" . $team_1 . "',";
     $sql .= "'" . $team_2 . "')";
 
-    //print $sql
+    // store new data
     if($query = $this->conn->real_query($sql)){
       print ("Stored");
     } else {
@@ -110,7 +110,7 @@ class Dbh {
 
     $sql = "DELETE FROM events WHERE id = '" . $id . "'";
 
-    //print $sql
+    // store new data
     if($query = $this->conn->real_query($sql)){
       print ("Stored");
     } else {
