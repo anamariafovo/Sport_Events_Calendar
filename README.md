@@ -1,1 +1,3 @@
-# Database built with XAMPP phpmyadmin.
+# Sport Events Calendar
+
+Database built with XAMPP phpmyadmin.
